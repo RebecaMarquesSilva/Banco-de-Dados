@@ -20,12 +20,12 @@ CREATE TABLE tb_personagem(
 	id BIGINT AUTO_INCREMENT,
 	nome VARCHAR(50) NOT NULL,
 	idade BIGINT,
-    altura DECIMAL(10,2),
-    ataque BIGINT NOT NULL,
-    defesa BIGINT NOT NULL,
+	altura DECIMAL(10,2),
+	ataque BIGINT NOT NULL,
+	defesa BIGINT NOT NULL,
 	id_classes BIGINT,
-    PRIMARY KEY (id),
-    FOREIGN KEY (id_classes) REFERENCES tb_classe(id) 
+	PRIMARY KEY (id),
+	FOREIGN KEY (id_classes) REFERENCES tb_classe(id) 
 );
 
 INSERT INTO tb_personagem (nome, idade, altura, ataque, defesa, id_classes) VALUES ("Fábio", 22, 1.70, 3000, 5000, 2);
