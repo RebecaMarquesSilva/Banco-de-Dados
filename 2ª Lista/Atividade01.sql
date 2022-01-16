@@ -25,12 +25,12 @@ CREATE TABLE tb_personagem(
 	altura DECIMAL(10,2),
 	ataque BIGINT NOT NULL,
 	defesa BIGINT NOT NULL,
-	id_classes BIGINT,
+	fk_classes BIGINT,
 	PRIMARY KEY (id),
-	FOREIGN KEY (id_classes) REFERENCES tb_classe(id) 
+	FOREIGN KEY (fk_classes) REFERENCES tb_classe(id) 
 );
 
-INSERT INTO tb_personagem (nome, idade, altura, ataque, defesa, id_classes) 
+INSERT INTO tb_personagem (nome, idade, altura, ataque, defesa, fk_classes) 
 VALUES 
 ("Fábio", 22, 1.70, 3000, 5000, 2),
 ("Cássio", 29, 2.00, 700, 9000, 1),
@@ -44,5 +44,5 @@ VALUES
 SELECT * FROM tb_personagem WHERE ataque > 2000;
 SELECT * FROM tb_personagem WHERE defesa BETWEEN 1000 AND 2000;
 SELECT * FROM tb_personagem WHERE tb_personagem.nome LIKE "%C%";
-SELECT * FROM tb_personagem INNER JOIN tb_classe ON tb_classe.id = tb_personagem.id_classes;
-SELECT * FROM tb_personagem INNER JOIN tb_classe ON tb_classe.id = tb_personagem.id_classes WHERE tb_classe.tipo = "Monge";
+SELECT * FROM tb_personagem INNER JOIN tb_classe ON tb_classe.id = tb_personagem.fk_classes;
+SELECT * FROM tb_personagem INNER JOIN tb_classe ON tb_classe.id = tb_personagem.fk_classes WHERE tb_classe.tipo = "Monge";
