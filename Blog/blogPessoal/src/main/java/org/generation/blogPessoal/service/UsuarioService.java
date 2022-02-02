@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Service
-public class UsuarioService {
+	@Service
+	public class UsuarioService {
 
 	@Autowired
 	private UsuarioRepository repository;
@@ -33,7 +33,7 @@ public class UsuarioService {
 			if(encoder.matches(user.get().getSenha(), usuario.get().getSenha())) {
 				
 				String auth = user.get().getUsuario() + ":" + user.get().getSenha();
-				byte[] encodeAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ACII")));
+				byte[] encodeAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
 				String authHeader = "Basic " + new String(encodeAuth);
 			
 				user.get().setToken(authHeader);
