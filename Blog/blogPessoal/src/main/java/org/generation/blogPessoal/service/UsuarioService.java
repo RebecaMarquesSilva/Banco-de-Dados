@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 	@Autowired
 	private UsuarioRepository repository;
 	
-	public Usuario CadastrarUsuario(Usuario usuario) {
+	public Usuario cadastrarUsuario(Usuario usuario) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
 		String senhaEncoder = encoder.encode(usuario.getSenha());

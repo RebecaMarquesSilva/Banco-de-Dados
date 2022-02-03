@@ -33,6 +33,6 @@ import org.springframework.web.bind.annotation.RestController;
 	@PostMapping("/cadastrar")
 	public ResponseEntity<Usuario> Post(@Valid @RequestBody Usuario usuario) {
 		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(usuarioService.CadastrarUsuario(usuario));		
+				.body(usuarioService.cadastrarUsuario(usuario));		
 	}
 }
