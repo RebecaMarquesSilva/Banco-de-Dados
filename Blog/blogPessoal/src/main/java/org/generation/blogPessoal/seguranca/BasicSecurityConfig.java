@@ -20,6 +20,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 		auth.userDetailsService(userDetailsService);
+		
+		auth.inMemoryAuthentication().withUser("root").password(passwordEncoder().encode("root"))
+			.authorities("ROLE_ADMIN");
 	}
 	
 	@Bean
