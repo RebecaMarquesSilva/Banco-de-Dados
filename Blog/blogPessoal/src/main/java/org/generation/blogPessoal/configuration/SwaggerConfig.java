@@ -28,7 +28,7 @@ public class SwaggerConfig {
 				.contact(new Contact()
 					.name("Rebeca Marques")
 					.url("https://github.com/RebecaMarquesSilva")
-					.email("rebecainfo@email.com")))
+					.email("rebecarmsg@gmail.com")))
 				.externalDocs(new ExternalDocumentation()
 					.description("Github")
 					.url("https://github.com/RebecaMarquesSilva/Banco-de-Dados/tree/main/Blog"));

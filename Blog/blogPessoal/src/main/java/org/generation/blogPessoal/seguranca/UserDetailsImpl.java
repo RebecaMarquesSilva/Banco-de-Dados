@@ -9,17 +9,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class UserDetailsImpl implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String username;
 	private String password;
-	
+
 	public UserDetailsImpl(Usuario user) {
 		this.username = user.getUsuario();
 		this.password = user.getSenha();
 	}
-	
-	public UserDetailsImpl() {}
-	
+
+	public UserDetailsImpl() {
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
