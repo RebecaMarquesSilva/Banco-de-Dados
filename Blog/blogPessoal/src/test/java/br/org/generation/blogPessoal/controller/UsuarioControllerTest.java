@@ -5,7 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Optional;
 
 import org.generation.blogPessoal.model.Usuario;
+import org.generation.blogPessoal.repository.UsuarioRepository;
 import org.generation.blogPessoal.service.UsuarioService;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -31,6 +34,14 @@ public class UsuarioControllerTest {
 
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+	
+	@BeforeAll
+	void start() {
+		usuarioRepository.deleteAll();	
+	}
 
 	@Test
 	@Order(1)
@@ -40,14 +51,15 @@ public class UsuarioControllerTest {
 		HttpEntity<Usuario> requisicao = new HttpEntity<Usuario>(
 				new Usuario(0L, "Fernando Torres", "fernando@email.com", "19191919"));
 
-		ResponseEntity<Usuario> resposta = testRestTemplate.exchange("/usuarios/cadastrar", HttpMethod.POST, requisicao,
-				Usuario.class);
+		ResponseEntity<Usuario> resposta = testRestTemplate
+				.exchange("/usuarios/cadastrar", HttpMethod.POST, requisicao, Usuario.class);
 
 		assertEquals(HttpStatus.CREATED, resposta.getStatusCode());
 		assertEquals(requisicao.getBody().getNome(), resposta.getBody().getNome());
 		assertEquals(requisicao.getBody().getUsuario(), resposta.getBody().getUsuario());
 	}
 
+	@Disabled
 	@Test
 	@Order(2)
 	@DisplayName("Não Deve Permitir a Duplicação do Usuário")
@@ -58,12 +70,13 @@ public class UsuarioControllerTest {
 		HttpEntity<Usuario> requisicao = new HttpEntity<Usuario>(
 				new Usuario(0L, "Maria Torres", "maria@email.com", "10101010"));
 
-		ResponseEntity<Usuario> resposta = testRestTemplate.exchange("/usuarios/cadastrar", HttpMethod.POST, requisicao,
-				Usuario.class);
+		ResponseEntity<Usuario> resposta = testRestTemplate
+				.exchange("/usuarios/cadastrar", HttpMethod.POST, requisicao, Usuario.class);
 
 		assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
 	}
 
+	@Disabled
 	@Test
 	@Order(3)
 	@DisplayName("Alterar um Usuário")
@@ -87,6 +100,7 @@ public class UsuarioControllerTest {
 		assertEquals(usuarioUpdate.getUsuario(), resposta.getBody().getUsuario());	
 	}
 
+	@Disabled
 	@Test
 	@Order(4)
 	@DisplayName("Listar Todos os Usuários")
