@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/postagens")
-@CrossOrigin("*")
 public class PostagemController {
 
 	@Autowired
@@ -46,12 +46,12 @@ public class PostagemController {
 		return ResponseEntity.ok(repository.findAllByTituloContainingIgnoreCase(titulo));
 	}
 
-	@PostMapping
+	@PostMapping("/postar")
 	public ResponseEntity<Postagem> post(@Valid @RequestBody Postagem postagem) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(postagem));
 	}
 
-	@PutMapping
+	@PutMapping("/editar")
 	public ResponseEntity<Postagem> put(@Valid @RequestBody Postagem postagem) {
 		return repository.findById(postagem.getId())
 				.map(resp -> ResponseEntity.status(HttpStatus.OK).body(repository.save(postagem)))

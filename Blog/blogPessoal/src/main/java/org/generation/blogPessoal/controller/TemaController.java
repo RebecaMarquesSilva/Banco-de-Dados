@@ -30,7 +30,7 @@ public class TemaController {
 	@Autowired
 	private TemaRepository repository;
 
-	@GetMapping
+	@GetMapping("/all")
 	public ResponseEntity<List<Tema>> getAll() {
 		return ResponseEntity.ok(repository.findAll());
 	}
@@ -41,17 +41,17 @@ public class TemaController {
 				.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
 	}
 
-	@GetMapping("/nome/{nome}")
-	public ResponseEntity<List<Tema>> getByName(@PathVariable String nome) {
-		return ResponseEntity.ok(repository.findAllByDescricaoContainingIgnoreCase(nome));
+	@GetMapping("/descricao/{descricao}")
+	public ResponseEntity<List<Tema>> getByTitle(@PathVariable String descricao) {
+		return ResponseEntity.ok(repository.findAllByDescricaoContainingIgnoreCase(descricao));
 	}
 
-	@PostMapping
+	@PostMapping("/novo")
 	public ResponseEntity<Tema> post(@Valid @RequestBody Tema tema) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(tema));
 	}
 
-	@PutMapping
+	@PutMapping("/atualizacao")
 	public ResponseEntity<Tema> put(@Valid @RequestBody Tema tema) {
 		return repository.findById(tema.getId())
 				.map(resp -> ResponseEntity.status(HttpStatus.CREATED).body(repository.save(tema)))
